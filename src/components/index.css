@@ -1,0 +1,37 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Space Grotesk", sans-serif;
+}
+body {
+  background-image: url("../assets/Firefly_GeminiFlash.png");
+}
+.fondoH{
+  background-color: rgba(0, 0, 0, 0.116);
+}
+.reserva {
+  background-color: #ffcd82f6 !important;
+  border: 0;
+  z-index: 500;
+}
+.reserva:hover {
+  background-color: #e6b875af !important;
+  border: 0;
+}
+/* styles.css */
+.fade-in {
+  opacity: 0;             /* empieza invisible */
+  transform: scale(0.5);  /* empieza más pequeño */
+  animation: fadeIn 2s forwards; /* duración 1s, aplica al final */
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;           /* termina visible */
+    transform: scale(1);  /* tamaño normal */
+  }
+}
+.bg-fondo{
+  background-color: #f8f5ee;
+}
