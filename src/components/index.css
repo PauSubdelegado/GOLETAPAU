@@ -19,6 +19,9 @@ body {
   background-color: #e6b875af !important;
   border: 0;
 }
+.rotar{
+  width: 450px;
+}
 /* styles.css */
 .fade-in {
   opacity: 0;             /* empieza invisible */
