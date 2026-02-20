@@ -11,7 +11,7 @@ const home = () => {
     <div className="container">
       <div className="row">
         <div className="col-12 text-center mt-3">
-          <h1 className="fw-semibold">BIENVENIDOS A LA GOLETA</h1>
+          <h1 className=" inicio">BIENVENIDOS A LA GOLETA</h1>
           <p className="fade-in">
             Explora la reconocida cocina de La Goleta, un restaurante de
             renombre en Oliva que ganó el concurso de Arroz a Banda de Denia en
@@ -82,6 +82,16 @@ const home = () => {
         </div>
         <div className="col-12 col-md-5 mt-5">
           <img src={img4} className="img-fluid rounded" alt="..."></img>
+        </div>
+        <div className="col-12">
+          <div className="carta text-center mt-5">
+          <h5 className="fw-bolder">CARTA</h5>
+          <p>Esta carta pues tiene muchas cosas buenas y todo esta bueno<br></br> pide lo que quieras que todo esta bueno</p>
+          <div className="plato">
+            <h5 className="">ARROCES</h5>
+            <p></p>
+          </div>
+          </div>
         </div>
       </div>
     </div>

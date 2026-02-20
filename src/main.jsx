@@ -6,6 +6,9 @@ import App from './App.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import 'bootstrap-icons/font/bootstrap-icons.css';
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Funnel+Sans:ital,wght@0,300..800;1,300..800&family=Quicksand:wght@300..700&family=Space+Grotesk:wght@300..700&display=swap');
+</style>
 
 
 

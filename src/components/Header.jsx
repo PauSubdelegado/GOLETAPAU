@@ -1,9 +1,7 @@
 import React from 'react'
 import restarunteLogo from '../assets/GolaFondo.png';
 import './index.css';
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Funnel+Sans:ital,wght@0,300..800;1,300..800&family=Space+Grotesk:wght@300..700&display=swap');
-</style>
+
 
 const Header = () => {
   return (
