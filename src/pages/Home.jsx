@@ -1,10 +1,13 @@
 import React from "react";
+import axios from "axios";
+import Carta from "./Carta";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import { useEffect, useState } from "react"
 import img1 from "../assets/carne-ahumada.jpg";
 import img2 from "../assets/paella2.jpg";
 import img3 from "../assets/paella1.jpg";
 import img4 from "../assets/marta.jpg";
-
-import "bootstrap/dist/js/bootstrap.bundle.min.js";
+;
 
 const home = () => {
   return (
@@ -83,17 +86,8 @@ const home = () => {
         <div className="col-12 col-md-5 mt-5">
           <img src={img4} className="img-fluid rounded" alt="..."></img>
         </div>
-        <div className="col-12">
-          <div className="carta text-center mt-5">
-          <h5 className="fw-bolder">CARTA</h5>
-          <p>Esta carta pues tiene muchas cosas buenas y todo esta bueno<br></br> pide lo que quieras que todo esta bueno</p>
-          <div className="plato">
-            <h5 className="">ARROCES</h5>
-            <p></p>
-          </div>
-          </div>
-        </div>
       </div>
+      <Carta />
     </div>
   );
 };

@@ -4,11 +4,14 @@
   box-sizing: border-box;
   font-family: "Quicksand", sans-serif;
 }
-body {
+
+bodyd {
   background-image: url("../assets/Firefly_GeminiFlash.png");
 }
 .fondoH{
-  background-color: rgba(0, 0, 0, 0.116);
+  background-image: url("../assets/Firefly_GeminiFlash.png");
+    background-color: #f703031e;
+
 }
 .reserva {
   background-color: #ffcd82f6 !important;
