@@ -10,9 +10,11 @@ bodyd {
 }
 .fondoH{
   background-image: url("../assets/Firefly_GeminiFlash.png");
-    background-color: #f703031e;
-
 }
+.dorado{
+  color: #90771b;
+}
+
 .reserva {
   background-color: #ffcd82f6 !important;
   border: 0;

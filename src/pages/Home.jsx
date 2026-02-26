@@ -7,10 +7,12 @@ import img1 from "../assets/carne-ahumada.jpg";
 import img2 from "../assets/paella2.jpg";
 import img3 from "../assets/paella1.jpg";
 import img4 from "../assets/marta.jpg";
+import salon from "../assets/prueba.jpg";
 ;
 
 const home = () => {
   return (
+    <>
     <div className="container">
       <div className="row">
         <div className="col-12 text-center mt-3">
@@ -30,7 +32,7 @@ const home = () => {
               <div id="carouselExample" class="carousel slide">
                 <div class="carousel-inner">
                   <div class="carousel-item active">
-                    <img src={img2} class="d-block rotar" alt="Carne Ahumada" />
+                    <img src={salon} class="d-block rotar" alt="Carne Ahumada" />
                   </div>
                   <div class="carousel-item">
                     <img src={img2} class="d-block rotar" alt="Paella 2" />
@@ -89,6 +91,7 @@ const home = () => {
       </div>
       <Carta />
     </div>
+    </>
   );
 };
 

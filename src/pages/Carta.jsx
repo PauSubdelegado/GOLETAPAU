@@ -20,53 +20,111 @@ function Carta() {
   return (
     <>
       <div className="row">
-        <div className="fondoH">
-          <p className="fs-3 text-center my-3">ENTRANTES</p>
-        </div>
-        {entrantes.map((plato) => (
-          <div className=" col-12 col-md-6 my-4 text-center" key={plato.id}>
+        <div className="accordion my-4" id="accordionEntrantes">
+          <div className="accordion-item">
+            <h3 className="accordion-header ">
+              <button
+                className="accordion-button collapsed text-center justify-content-center fw-bold fondoH"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseEntrantes"
+              >
+                ENTRANTES
+              </button>
+            </h3>
+
             <div
-              className="h-100 d-flex flex-column p-3 text-center mx-auto "
-              style={{ maxWidth: "500px" }}
+              id="collapseEntrantes"
+              className="accordion-collapse collapse"
+              data-bs-parent="#accordionEntrantes"
             >
-              <h5>{plato.nombre}</h5>
-              <p>{plato.descripcion}</p>
-              <p className="">
-                {Number.isInteger(Number(plato.precio))
-                  ? Number(plato.precio)
-                  : Number(plato.precio).toFixed(2)}
-              </p>
-              <button onClick={() => setPlatoSeleccionado(plato)}>ℹ️</button>
+              <div className="accordion-body">
+                <div className="row">
+                  {entrantes.map((plato) => (
+                    <div
+                      className="col-12 col-md-6 my-2 text-center"
+                      key={plato.id}
+                    >
+                      <div
+                        className="h-100 d-flex flex-column p-3 mx-auto border border-0"
+                        style={{ maxWidth: "500px" }}
+                      >
+                        <h5>{plato.nombre}</h5>
+                        <p>{plato.descripcion}</p>
+                        <p>
+                          {Number.isInteger(Number(plato.precio))
+                            ? Number(plato.precio)
+                            : Number(plato.precio).toFixed(2)} €
+                        </p>
+                        <i className="bi bi-info-circle fs-5" onClick={() => setPlatoSeleccionado(plato)}></i>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
-        ))}
-       
-      </div>
-       {platoSeleccionado && (
-          <ModalPlatos
-            plato={platoSeleccionado}
-            onClose={() => setPlatoSeleccionado(null)}
-          />
-        )}
-      <div className="row">
-        <div className="fondoH">
-          <h3 className="text-center my-3">Principales</h3>
         </div>
-        {principales.map((plato) => (
-          <div
-            className=" col-12 col-md-4 my-4 mx-4 text-center"
-            key={plato.id}
-          >
-            <h5>{plato.nombre}</h5>
-            <p className="">{plato.descripcion}</p>
-            <p className="">
-              {Number.isInteger(Number(plato.precio))
-                ? Number(plato.precio)
-                : Number(plato.precio).toFixed(2)}
-            </p>
-          </div>
-        ))}
       </div>
+      {platoSeleccionado && (
+        <ModalPlatos
+          plato={platoSeleccionado}
+          onClose={() => setPlatoSeleccionado(null)}
+        />
+      )}
+      <div className="row">
+        <div className="accordion my-2" id="accordionEntrantes">
+          <div className="accordion-item">
+            <h3 className="accordion-header ">
+              <button
+                className="accordion-button collapsed text-center justify-content-center fw-bold fondoH"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseArroces"
+              >
+                ARROCES
+              </button>
+            </h3>
+
+            <div
+              id="collapseArroces"
+              className="accordion-collapse collapse"
+              data-bs-parent="#accordionEntrantes"
+            >
+              <div className="accordion-body">
+                <div className="row">
+                  {principales.map((plato) => (
+                    <div
+                      className="col-12 col-md-6 my-4 text-center"
+                      key={plato.id}
+                    >
+                      <div
+                        className="h-100 d-flex flex-column p-3 mx-auto border border-0"
+                        style={{ maxWidth: "500px" }}
+                      >
+                        <h5>{plato.nombre}</h5>
+                        <p>{plato.descripcion}</p>
+                        <p>
+                          {Number.isInteger(Number(plato.precio))
+                            ? Number(plato.precio)
+                            : Number(plato.precio).toFixed(2)} €
+                        </p>
+                        <i className="bi bi-info-circle fs-5" onClick={() => setPlatoSeleccionado(plato)}></i>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {platoSeleccionado && (
+        <ModalPlatos
+          plato={platoSeleccionado}
+          onClose={() => setPlatoSeleccionado(null)}
+        />
+      )}
     </>
   );
 }
