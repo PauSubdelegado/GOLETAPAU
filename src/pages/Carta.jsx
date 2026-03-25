@@ -12,7 +12,7 @@ function Carta() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/platos")
+      .get("https://backend-production-8813.up.railway.app/api/platos")
       .then((res) => setPlatos(res.data))
       .catch((err) => console.error(err));
   }, []);
