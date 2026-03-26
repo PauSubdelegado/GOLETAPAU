@@ -4,10 +4,14 @@ import axios from "axios";
 const API = "https://backend-production-8813.up.railway.app/api";
 const getToken = () => localStorage.getItem('token');
 
+const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/daxkbuyyu/image/upload";
+const CLOUDINARY_PRESET = "restaurante_preset";
+
 function AdminPlatos() {
   const [platos, setPlatos] = useState([]);
   const [editando, setEditando] = useState(false);
   const [platoId, setPlatoId] = useState(null);
+  const [subiendoImagen, setSubiendoImagen] = useState(false); // 👈
 
   const [formData, setFormData] = useState({
     nombre: "",
@@ -33,10 +37,9 @@ function AdminPlatos() {
   const borrarPlato = (id) => {
     const confirmacion = window.confirm("¿Estás seguro de que quieres borrar este plato?");
     if (!confirmacion) return;
-
     axios
       .delete(`${API}/platos/${id}`, {
-        headers: { Authorization: `Bearer ${getToken()}` } // 👈
+        headers: { Authorization: `Bearer ${getToken()}` },
       })
       .then(() => cargarPlatos())
       .catch((err) => console.error(err));
@@ -50,6 +53,27 @@ function AdminPlatos() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // 👇 Nueva función para subir imagen a Cloudinary
+  const handleImagenChange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    setSubiendoImagen(true);
+    const data = new FormData();
+    data.append("file", file);
+    data.append("upload_preset", CLOUDINARY_PRESET);
+
+    try {
+      const res = await axios.post(CLOUDINARY_URL, data);
+      setFormData((prev) => ({ ...prev, imagen: res.data.secure_url }));
+    } catch (err) {
+      console.error("Error subiendo imagen:", err);
+      alert("Error al subir la imagen");
+    } finally {
+      setSubiendoImagen(false);
+    }
+  };
+
   const resetForm = () => {
     setFormData({ nombre: "", descripcion: "", precio: "", categoria: "entrante", imagen: "" });
     setEditando(false);
@@ -58,15 +82,15 @@ function AdminPlatos() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const headers = { Authorization: `Bearer ${getToken()}` }; // 👈
+    const headers = { Authorization: `Bearer ${getToken()}` };
 
     if (editando) {
       axios
-        .put(`${API}/platos/${platoId}`, formData, { headers }) // 👈
+        .put(`${API}/platos/${platoId}`, formData, { headers })
         .then(() => { cargarPlatos(); resetForm(); });
     } else {
       axios
-        .post(`${API}/platos`, formData, { headers }) // 👈
+        .post(`${API}/platos`, formData, { headers })
         .then(() => { cargarPlatos(); resetForm(); });
     }
   };
@@ -90,18 +114,27 @@ function AdminPlatos() {
             <option key={cat} value={cat}>{cat.charAt(0).toUpperCase() + cat.slice(1)}</option>
           ))}
         </select>
-        <input type="text" name="imagen" placeholder="Nombre imagen" className="form-control mb-2"
-          value={formData.imagen} onChange={handleChange} />
-        <button className="btn btn-primary">
+
+        {/* 👇 Nuevo campo de imagen */}
+        <div className="mb-2">
+          <input type="file" accept="image/*" className="form-control"
+            onChange={handleImagenChange} />
+          {subiendoImagen && <small className="text-muted">Subiendo imagen...</small>}
+          {formData.imagen && !subiendoImagen && (
+            <img src={formData.imagen} alt="preview" className="mt-2"
+              style={{ height: "80px", objectFit: "cover", borderRadius: "6px" }} />
+          )}
+        </div>
+
+        <button className="btn btn-primary" disabled={subiendoImagen}>
           {editando ? "Editar Plato" : "Crear Plato"}
         </button>
-        {editando && ( 
+        {editando && (
           <button type="button" className="btn btn-secondary ms-2" onClick={resetForm}>
             Cancelar
           </button>
         )}
       </form>
-
 
       <hr />
       <h3>Platos actuales por categoría</h3>
@@ -123,12 +156,18 @@ function AdminPlatos() {
                 <div className="accordion-body">
                   <ul className="list-group">
                     {platosCat.map((plato) => (
-                      <li key={plato.id} className="list-group-item d-flex justify-content-between">
-                        <div>
-                          {plato.nombre} -{" "}
-                          {Number.isInteger(Number(plato.precio))
-                            ? Number(plato.precio)
-                            : Number(plato.precio).toFixed(2)}€
+                      <li key={plato.id} className="list-group-item d-flex justify-content-between align-items-center">
+                        <div className="d-flex align-items-center gap-3">
+                          {plato.imagen && (
+                            <img src={plato.imagen} alt={plato.nombre}
+                              style={{ height: "50px", width: "50px", objectFit: "cover", borderRadius: "4px" }} />
+                          )}
+                          <span>
+                            {plato.nombre} -{" "}
+                            {Number.isInteger(Number(plato.precio))
+                              ? Number(plato.precio)
+                              : Number(plato.precio).toFixed(2)}€
+                          </span>
                         </div>
                         <div>
                           <button className="btn btn-warning btn-sm me-2" onClick={() => editarPlato(plato)}>Editar</button>

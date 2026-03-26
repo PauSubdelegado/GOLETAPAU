@@ -6,17 +6,10 @@ function ModalPlatos({ plato, onClose }) {
   return (
     <>
       {/* Fons semi-transparent que bloqueja la resta de la pàgina */}
-      <div 
-        className="modal-backdrop fade show"
-        style={{ zIndex: 1040 }}
-      ></div>
+      <div className="modal-backdrop fade show" style={{ zIndex: 1040 }}></div>
 
       {/* Modal centrat */}
-      <div
-        className="modal d-block"
-        tabIndex="-1"
-        style={{ zIndex: 1050 }}
-      >
+      <div className="modal d-block" tabIndex="-1" style={{ zIndex: 1050 }}>
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
             <div className="modal-header">
@@ -31,7 +24,7 @@ function ModalPlatos({ plato, onClose }) {
               <p>{plato.descripcion}</p>
               {plato.imagen && (
                 <img
-                  src={"/fotosComida/paella2.jpg"} 
+                  src={plato.imagen} // 👈 solo cambia esto
                   alt={plato.nombre}
                   className="img-fluid"
                 />
